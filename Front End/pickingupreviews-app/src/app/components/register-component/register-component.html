@@ -1,0 +1,108 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-body p-5">
+          <h2 class="text-center mb-4">Create Account</h2>
+
+          @if (successMessage()) {
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> {{ successMessage() }}
+            <button type="button" class="btn-close" (click)="successMessage.set(null)"></button>
+          </div>
+          } @if (errorMessage()) {
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ errorMessage() }}
+            <button type="button" class="btn-close" (click)="errorMessage.set(null)"></button>
+          </div>
+          } @if (!successMessage()) {
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                formControlName="name"
+                [class.is-invalid]="
+                  registerForm.get('name')?.invalid && registerForm.get('name')?.touched
+                "
+              />
+              @if (registerForm.get('name')?.errors?.['required'] &&
+              registerForm.get('name')?.touched) {
+              <div class="invalid-feedback d-block">Name is required</div>
+              } @if (registerForm.get('name')?.errors?.['minlength'] &&
+              registerForm.get('name')?.touched) {
+              <div class="invalid-feedback d-block">Name must be at least 2 characters</div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                [class.is-invalid]="
+                  registerForm.get('email')?.invalid && registerForm.get('email')?.touched
+                "
+              />
+              @if (registerForm.get('email')?.errors?.['required'] &&
+              registerForm.get('email')?.touched) {
+              <div class="invalid-feedback d-block">Email is required</div>
+              } @if (registerForm.get('email')?.errors?.['email'] &&
+              registerForm.get('email')?.touched) {
+              <div class="invalid-feedback d-block">Please enter a valid email</div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                formControlName="password"
+                [class.is-invalid]="
+                  registerForm.get('password')?.invalid && registerForm.get('password')?.touched
+                "
+              />
+              @if (registerForm.get('password')?.errors?.['required'] &&
+              registerForm.get('password')?.touched) {
+              <div class="invalid-feedback d-block">Password is required</div>
+              } @if (registerForm.get('password')?.errors?.['minlength'] &&
+              registerForm.get('password')?.touched) {
+              <div class="invalid-feedback d-block">Password must be at least 6 characters</div>
+              }
+            </div>
+
+            <div class="d-grid gap-2">
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg"
+                [disabled]="registerForm.invalid || loading()"
+              >
+                @if (loading()) {
+                <span class="spinner-border spinner-border-sm me-2"></span>
+                } Register
+              </button>
+            </div>
+          </form>
+          } @else {
+          <div class="text-center mt-3">
+            <a routerLink="/login" class="btn btn-primary">Go to Login</a>
+          </div>
+          } @if (!successMessage()) {
+          <div class="text-center mt-3">
+            <p class="mb-0">
+              Already have an account?
+              <a routerLink="/login" class="text-decoration-none">Login here</a>
+            </p>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

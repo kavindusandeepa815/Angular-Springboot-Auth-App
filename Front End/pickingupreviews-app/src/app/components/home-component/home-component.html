@@ -1,0 +1,41 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-lg-8 mx-auto text-center">
+      <h1 class="display-4 mb-4">Welcome to Auth App</h1>
+      <p class="lead mb-4">
+        A full-stack authentication application built with Angular and Spring Boot
+      </p>
+
+      @if (currentUser(); as user) {
+      <div class="alert alert-success">
+        <h4>Hello, {{ user.name }}! 👋</h4>
+        <p class="mb-0">You are successfully logged in as {{ user.role }}</p>
+      </div>
+      } @else {
+      <div class="alert alert-info">
+        <p class="mb-3">Get started by creating an account or signing in</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+          <a routerLink="/register" class="btn btn-primary btn-lg">Register with Email</a>
+          <a routerLink="/login" class="btn btn-outline-primary btn-lg">Login</a>
+        </div>
+        <p class="text-center mt-3 mb-0">
+          <small class="text-muted">Or sign in/up instantly with Google on the login page</small>
+        </p>
+      </div>
+      }
+
+      <div class="row mt-5">
+        @for (feature of features; track feature.title) {
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">{{ feature.icon }} {{ feature.title }}</h5>
+              <p class="card-text">{{ feature.description }}</p>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

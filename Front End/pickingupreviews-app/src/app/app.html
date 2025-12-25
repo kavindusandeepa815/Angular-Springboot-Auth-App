@@ -1,0 +1,11 @@
+<style>
+  main {
+    transition: opacity 0.3s ease-in-out;
+  }
+</style>
+
+<app-header-component />
+<main style="min-height: calc(100vh - 160px)" class="fade-in">
+  <router-outlet />
+</main>
+<app-footer-component />

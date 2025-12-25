@@ -1,0 +1,32 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-body p-5 text-center">
+          @if (loading()) {
+          <div>
+            <div class="spinner-border text-primary mb-3" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <h4>Verifying your email...</h4>
+          </div>
+          } @if (success()) {
+          <div class="text-success">
+            <div style="font-size: 4rem">✅</div>
+            <h2 class="mt-3">Email Verified!</h2>
+            <p class="lead">{{ message() }}</p>
+            <a routerLink="/login" class="btn btn-primary btn-lg mt-3">Go to Login</a>
+          </div>
+          } @if (error()) {
+          <div class="text-danger">
+            <div style="font-size: 4rem">❌</div>
+            <h2 class="mt-3">Verification Failed</h2>
+            <p class="lead">{{ message() }}</p>
+            <a routerLink="/register" class="btn btn-primary mt-3">Back to Register</a>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
